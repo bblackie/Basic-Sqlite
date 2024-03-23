@@ -1,12 +1,9 @@
 import sqlite3
+import sql_scripts as ss
+
 
 DATABASE = 'cars.db'
-SQL_SELECT_CARS_BY_OWNER = '''
-                            SELECT owner.name, owner.wealth, car.name
-                            FROM owner JOIN car_owner ON owner.id = car_owner.owner_id
-                            JOIN car ON car.id = car_owner.car_id
-                            WHERE owner.name = ?;
-                            '''
+
 
 
 def print_cars_by_owner(owner):
@@ -16,7 +13,7 @@ def print_cars_by_owner(owner):
 
         sql = "SELECT * FROM owner;"
 
-        cursor.execute(SQL_SELECT_CARS_BY_OWNER,(owner,))
+        cursor.execute(ss.SQL_SELECT_CARS_BY_OWNER,(owner,))
         results = cursor.fetchall()
 
         for record in results:
@@ -25,8 +22,8 @@ def print_cars_by_owner(owner):
 
 
 
-
 if __name__ == "__main__":
     print("Hello, World")
+    print("What can I do for you?")
     owner = input("What person do you want to investigate? ")
     print_cars_by_owner(owner)
